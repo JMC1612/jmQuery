@@ -12,7 +12,7 @@ namespace JmcAs400Query
         public static MainForm Instance;
         public MainForm()
         {
-            if(Instance == null)
+            if (Instance == null)
             {
                 Instance = this;
             }
@@ -51,7 +51,7 @@ namespace JmcAs400Query
 
             Task<DataTable> queryTask = Task.Run(() => QueryManager.ExecuteQuery(queryTextBox.Text));
             DataTable queryData = await queryTask;
-            
+
             dataDisplay.DataSource = queryData;
             dataDisplay.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
@@ -72,6 +72,11 @@ namespace JmcAs400Query
             {
                 File.WriteAllText(saveDialog.FileName, CsvManager.CreateCsvContent(QueryManager.lastQueryResult), Encoding.UTF8);
             }
+        }
+
+        private void executeQryButton_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(Properties.Resources.jmQuery, new Rectangle(8, 11, 80, 80));
         }
     }
 }

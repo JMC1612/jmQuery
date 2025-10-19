@@ -30,6 +30,7 @@ namespace JmcAs400Query
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             dbsourceTextBox = new TextBox();
             label1 = new Label();
             label2 = new Label();
@@ -52,89 +53,84 @@ namespace JmcAs400Query
             // 
             // dbsourceTextBox
             // 
-            dbsourceTextBox.Location = new Point(19, 45);
-            dbsourceTextBox.Margin = new Padding(3, 4, 3, 4);
+            dbsourceTextBox.Location = new Point(17, 34);
             dbsourceTextBox.Name = "dbsourceTextBox";
-            dbsourceTextBox.Size = new Size(114, 27);
+            dbsourceTextBox.Size = new Size(100, 23);
             dbsourceTextBox.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(19, 21);
+            label1.Location = new Point(17, 16);
             label1.Name = "label1";
-            label1.Size = new Size(103, 20);
+            label1.Size = new Size(83, 15);
             label1.TabIndex = 1;
             label1.Text = "ODBC-Source:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(140, 21);
+            label2.Location = new Point(122, 16);
             label2.Name = "label2";
-            label2.Size = new Size(41, 20);
+            label2.Size = new Size(33, 15);
             label2.TabIndex = 3;
             label2.Text = "User:";
             // 
             // userTextBox
             // 
-            userTextBox.Location = new Point(140, 45);
-            userTextBox.Margin = new Padding(3, 4, 3, 4);
+            userTextBox.Location = new Point(122, 34);
             userTextBox.Name = "userTextBox";
-            userTextBox.Size = new Size(114, 27);
+            userTextBox.Size = new Size(100, 23);
             userTextBox.TabIndex = 2;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(261, 21);
+            label3.Location = new Point(228, 16);
             label3.Name = "label3";
-            label3.Size = new Size(73, 20);
+            label3.Size = new Size(60, 15);
             label3.TabIndex = 5;
             label3.Text = "Password:";
             // 
             // passwordTextBox
             // 
-            passwordTextBox.Location = new Point(261, 45);
-            passwordTextBox.Margin = new Padding(3, 4, 3, 4);
+            passwordTextBox.Location = new Point(228, 34);
             passwordTextBox.Name = "passwordTextBox";
-            passwordTextBox.Size = new Size(114, 27);
+            passwordTextBox.Size = new Size(100, 23);
             passwordTextBox.TabIndex = 4;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(382, 21);
+            label4.Location = new Point(334, 16);
             label4.Name = "label4";
-            label4.Size = new Size(121, 20);
+            label4.Size = new Size(95, 15);
             label4.TabIndex = 7;
             label4.Text = "Default Libraries:";
             // 
             // queryTextBox
             // 
             queryTextBox.BorderStyle = BorderStyle.FixedSingle;
-            queryTextBox.Location = new Point(14, 153);
-            queryTextBox.Margin = new Padding(3, 4, 3, 4);
+            queryTextBox.Location = new Point(12, 115);
             queryTextBox.Multiline = true;
             queryTextBox.Name = "queryTextBox";
-            queryTextBox.Size = new Size(771, 119);
+            queryTextBox.Size = new Size(675, 90);
             queryTextBox.TabIndex = 9;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(14, 129);
+            label5.Location = new Point(12, 97);
             label5.Name = "label5";
-            label5.Size = new Size(51, 20);
+            label5.Size = new Size(42, 15);
             label5.TabIndex = 10;
             label5.Text = "Query:";
             // 
             // connectButton
             // 
-            connectButton.Location = new Point(172, 82);
-            connectButton.Margin = new Padding(3, 4, 3, 4);
+            connectButton.Location = new Point(150, 62);
             connectButton.Name = "connectButton";
-            connectButton.Size = new Size(86, 31);
+            connectButton.Size = new Size(75, 23);
             connectButton.TabIndex = 11;
             connectButton.Text = "Connect";
             connectButton.UseVisualStyleBackColor = true;
@@ -143,39 +139,41 @@ namespace JmcAs400Query
             // statusLabel
             // 
             statusLabel.AutoSize = true;
-            statusLabel.Location = new Point(14, 87);
+            statusLabel.Location = new Point(12, 65);
             statusLabel.Name = "statusLabel";
-            statusLabel.Size = new Size(151, 20);
+            statusLabel.Size = new Size(122, 15);
             statusLabel.TabIndex = 12;
             statusLabel.Text = "Status: not connected";
             // 
             // dataDisplay
             // 
             dataDisplay.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataDisplay.Location = new Point(14, 280);
-            dataDisplay.Margin = new Padding(3, 4, 3, 4);
+            dataDisplay.Location = new Point(12, 210);
             dataDisplay.Name = "dataDisplay";
             dataDisplay.RowHeadersWidth = 51;
-            dataDisplay.Size = new Size(887, 457);
+            dataDisplay.Size = new Size(776, 343);
             dataDisplay.TabIndex = 13;
             // 
             // executeQryButton
             // 
-            executeQryButton.Location = new Point(791, 153);
-            executeQryButton.Margin = new Padding(3, 4, 3, 4);
+            executeQryButton.ImageAlign = ContentAlignment.BottomCenter;
+            executeQryButton.Location = new Point(692, 115);
             executeQryButton.Name = "executeQryButton";
-            executeQryButton.Size = new Size(110, 119);
+            executeQryButton.RightToLeft = RightToLeft.No;
+            executeQryButton.Size = new Size(96, 89);
             executeQryButton.TabIndex = 18;
             executeQryButton.Text = "Execute query";
+            executeQryButton.TextAlign = ContentAlignment.TopCenter;
+            executeQryButton.TextImageRelation = TextImageRelation.TextAboveImage;
             executeQryButton.UseVisualStyleBackColor = true;
             executeQryButton.Click += executeQryButton_Click;
+            executeQryButton.Paint += executeQryButton_Paint;
             // 
             // disconnectButton
             // 
-            disconnectButton.Location = new Point(264, 82);
-            disconnectButton.Margin = new Padding(3, 4, 3, 4);
+            disconnectButton.Location = new Point(231, 62);
             disconnectButton.Name = "disconnectButton";
-            disconnectButton.Size = new Size(99, 31);
+            disconnectButton.Size = new Size(87, 23);
             disconnectButton.TabIndex = 19;
             disconnectButton.Text = "Disconnect";
             disconnectButton.UseVisualStyleBackColor = true;
@@ -183,17 +181,17 @@ namespace JmcAs400Query
             // 
             // libsTextbox
             // 
-            libsTextbox.Location = new Point(382, 45);
-            libsTextbox.Margin = new Padding(3, 4, 3, 4);
+            libsTextbox.Location = new Point(334, 34);
             libsTextbox.Name = "libsTextbox";
-            libsTextbox.Size = new Size(519, 27);
+            libsTextbox.Size = new Size(455, 23);
             libsTextbox.TabIndex = 20;
             // 
             // exportToCsvButton
             // 
-            exportToCsvButton.Location = new Point(14, 745);
+            exportToCsvButton.Location = new Point(12, 559);
+            exportToCsvButton.Margin = new Padding(3, 2, 3, 2);
             exportToCsvButton.Name = "exportToCsvButton";
-            exportToCsvButton.Size = new Size(128, 29);
+            exportToCsvButton.Size = new Size(112, 22);
             exportToCsvButton.TabIndex = 21;
             exportToCsvButton.Text = "Export to CSV";
             exportToCsvButton.UseVisualStyleBackColor = true;
@@ -204,17 +202,17 @@ namespace JmcAs400Query
             errorLabelnew.BackColor = Color.Transparent;
             errorLabelnew.Font = new Font("Segoe UI", 7.20000029F, FontStyle.Regular, GraphicsUnit.Point, 0);
             errorLabelnew.ForeColor = Color.Red;
-            errorLabelnew.Location = new Point(382, 76);
+            errorLabelnew.Location = new Point(334, 57);
             errorLabelnew.Name = "errorLabelnew";
-            errorLabelnew.Size = new Size(519, 73);
+            errorLabelnew.Size = new Size(454, 55);
             errorLabelnew.TabIndex = 22;
             errorLabelnew.TextAlign = ContentAlignment.BottomLeft;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(911, 786);
+            ClientSize = new Size(799, 596);
             Controls.Add(errorLabelnew);
             Controls.Add(exportToCsvButton);
             Controls.Add(libsTextbox);
@@ -232,10 +230,10 @@ namespace JmcAs400Query
             Controls.Add(userTextBox);
             Controls.Add(label1);
             Controls.Add(dbsourceTextBox);
-            Margin = new Padding(3, 4, 3, 4);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
-            MaximumSize = new Size(929, 833);
-            MinimumSize = new Size(929, 833);
+            MaximumSize = new Size(815, 635);
+            MinimumSize = new Size(815, 635);
             Name = "MainForm";
             Text = "jmQuery";
             Load += MainForm_Load;
