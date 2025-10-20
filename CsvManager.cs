@@ -31,5 +31,35 @@ namespace JmcAs400Query
             }
             return field;
         }
+
+        public static DataTable LoadDataTableFromCsv(string filePath, char delimiter = ',')
+        {
+            DataTable dt = new DataTable();
+            using (var reader = new StreamReader(filePath))
+            {
+                bool isHeader = true;
+                string? line;
+
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] values = line.Split(delimiter);
+
+                    if (isHeader)
+                    {
+                        foreach (var header in values)
+                        {
+                            dt.Columns.Add(header.Trim());
+                        }
+                        isHeader = false;
+                    }
+                    else
+                    {
+                        dt.Rows.Add(values);
+                    }
+                }
+            }
+            dt.TableName = Path.GetFileNameWithoutExtension(filePath);
+            return dt;
+        }
     }
 }

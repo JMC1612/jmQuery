@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using JmcAs400Query.UI_Controls.PopoutDemo;
+using System.Data;
 
 namespace JmcAs400Query
 {
@@ -31,7 +32,6 @@ namespace JmcAs400Query
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            dbsourceTextBox = new TextBox();
             label1 = new Label();
             label2 = new Label();
             userTextBox = new TextBox();
@@ -48,20 +48,18 @@ namespace JmcAs400Query
             libsTextbox = new TextBox();
             exportToCsvButton = new Button();
             errorLabelnew = new Label();
+            quickMenuPopoutbutton = new PopoutMenuButton();
+            datasourceComboBox = new ComboBox();
+            panel1 = new Panel();
+            label6 = new Label();
+            queryinfoLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)dataDisplay).BeginInit();
             SuspendLayout();
-            // 
-            // dbsourceTextBox
-            // 
-            dbsourceTextBox.Location = new Point(17, 34);
-            dbsourceTextBox.Name = "dbsourceTextBox";
-            dbsourceTextBox.Size = new Size(100, 23);
-            dbsourceTextBox.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(17, 16);
+            label1.Location = new Point(12, 16);
             label1.Name = "label1";
             label1.Size = new Size(83, 15);
             label1.TabIndex = 1;
@@ -70,7 +68,7 @@ namespace JmcAs400Query
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(122, 16);
+            label2.Location = new Point(150, 16);
             label2.Name = "label2";
             label2.Size = new Size(33, 15);
             label2.TabIndex = 3;
@@ -78,7 +76,7 @@ namespace JmcAs400Query
             // 
             // userTextBox
             // 
-            userTextBox.Location = new Point(122, 34);
+            userTextBox.Location = new Point(150, 34);
             userTextBox.Name = "userTextBox";
             userTextBox.Size = new Size(100, 23);
             userTextBox.TabIndex = 2;
@@ -86,7 +84,7 @@ namespace JmcAs400Query
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(228, 16);
+            label3.Location = new Point(256, 16);
             label3.Name = "label3";
             label3.Size = new Size(60, 15);
             label3.TabIndex = 5;
@@ -94,7 +92,7 @@ namespace JmcAs400Query
             // 
             // passwordTextBox
             // 
-            passwordTextBox.Location = new Point(228, 34);
+            passwordTextBox.Location = new Point(256, 34);
             passwordTextBox.Name = "passwordTextBox";
             passwordTextBox.Size = new Size(100, 23);
             passwordTextBox.TabIndex = 4;
@@ -102,7 +100,7 @@ namespace JmcAs400Query
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(334, 16);
+            label4.Location = new Point(362, 16);
             label4.Name = "label4";
             label4.Size = new Size(95, 15);
             label4.TabIndex = 7;
@@ -110,23 +108,14 @@ namespace JmcAs400Query
             // 
             // queryTextBox
             // 
-            queryTextBox.BackColor = Color.White;
-            queryTextBox.BorderStyle = BorderStyle.FixedSingle;
-<<<<<<< Updated upstream:MainForm.Designer.cs
-            queryTextBox.Location = new Point(12, 115);
-            queryTextBox.Multiline = true;
-            queryTextBox.Name = "queryTextBox";
-            queryTextBox.Size = new Size(675, 90);
-=======
             queryTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             queryTextBox.ForeColor = Color.Black;
-            queryTextBox.Location = new Point(14, 153);
+            queryTextBox.Location = new Point(15, 116);
             queryTextBox.Margin = new Padding(3, 4, 3, 4);
             queryTextBox.Multiline = true;
             queryTextBox.Name = "queryTextBox";
             queryTextBox.ScrollBars = ScrollBars.Vertical;
-            queryTextBox.Size = new Size(771, 239);
->>>>>>> Stashed changes:Forms/MainForm.Designer.cs
+            queryTextBox.Size = new Size(774, 239);
             queryTextBox.TabIndex = 9;
             // 
             // label5
@@ -160,29 +149,19 @@ namespace JmcAs400Query
             // dataDisplay
             // 
             dataDisplay.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-<<<<<<< Updated upstream:MainForm.Designer.cs
-            dataDisplay.Location = new Point(12, 210);
-=======
-            dataDisplay.Location = new Point(14, 400);
-            dataDisplay.Margin = new Padding(3, 4, 3, 4);
->>>>>>> Stashed changes:Forms/MainForm.Designer.cs
+            dataDisplay.Location = new Point(15, 362);
             dataDisplay.Name = "dataDisplay";
             dataDisplay.RowHeadersWidth = 51;
-            dataDisplay.Size = new Size(776, 343);
+            dataDisplay.Size = new Size(878, 343);
             dataDisplay.TabIndex = 13;
             // 
             // executeQryButton
             // 
             executeQryButton.ImageAlign = ContentAlignment.BottomCenter;
-<<<<<<< Updated upstream:MainForm.Designer.cs
-            executeQryButton.Location = new Point(692, 115);
-=======
-            executeQryButton.Location = new Point(789, 153);
-            executeQryButton.Margin = new Padding(3, 4, 3, 4);
->>>>>>> Stashed changes:Forms/MainForm.Designer.cs
+            executeQryButton.Location = new Point(794, 116);
             executeQryButton.Name = "executeQryButton";
             executeQryButton.RightToLeft = RightToLeft.No;
-            executeQryButton.Size = new Size(96, 89);
+            executeQryButton.Size = new Size(96, 96);
             executeQryButton.TabIndex = 18;
             executeQryButton.Text = "Execute query";
             executeQryButton.TextAlign = ContentAlignment.TopCenter;
@@ -203,19 +182,15 @@ namespace JmcAs400Query
             // 
             // libsTextbox
             // 
-            libsTextbox.Location = new Point(334, 34);
+            libsTextbox.Location = new Point(362, 34);
             libsTextbox.Name = "libsTextbox";
-            libsTextbox.Size = new Size(455, 23);
+            libsTextbox.Size = new Size(195, 23);
             libsTextbox.TabIndex = 20;
             // 
             // exportToCsvButton
             // 
-<<<<<<< Updated upstream:MainForm.Designer.cs
-            exportToCsvButton.Location = new Point(12, 559);
+            exportToCsvButton.Location = new Point(15, 710);
             exportToCsvButton.Margin = new Padding(3, 2, 3, 2);
-=======
-            exportToCsvButton.Location = new Point(14, 865);
->>>>>>> Stashed changes:Forms/MainForm.Designer.cs
             exportToCsvButton.Name = "exportToCsvButton";
             exportToCsvButton.Size = new Size(112, 22);
             exportToCsvButton.TabIndex = 21;
@@ -234,18 +209,66 @@ namespace JmcAs400Query
             errorLabelnew.TabIndex = 22;
             errorLabelnew.TextAlign = ContentAlignment.BottomLeft;
             // 
+            // quickMenuPopoutbutton
+            // 
+            quickMenuPopoutbutton.AccessibleRole = AccessibleRole.PushButton;
+            quickMenuPopoutbutton.FlatStyle = FlatStyle.System;
+            quickMenuPopoutbutton.Location = new Point(794, 34);
+            quickMenuPopoutbutton.Name = "quickMenuPopoutbutton";
+            quickMenuPopoutbutton.Size = new Size(96, 23);
+            quickMenuPopoutbutton.TabIndex = 23;
+            quickMenuPopoutbutton.Text = "Quick menu";
+            quickMenuPopoutbutton.UseVisualStyleBackColor = true;
+            // 
+            // datasourceComboBox
+            // 
+            datasourceComboBox.FormattingEnabled = true;
+            datasourceComboBox.Location = new Point(12, 34);
+            datasourceComboBox.Name = "datasourceComboBox";
+            datasourceComboBox.Size = new Size(132, 23);
+            datasourceComboBox.TabIndex = 24;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.Control;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Location = new Point(795, 218);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(90, 137);
+            panel1.TabIndex = 25;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            label6.Location = new Point(808, 223);
+            label6.Name = "label6";
+            label6.Size = new Size(66, 15);
+            label6.TabIndex = 26;
+            label6.Text = "Query info:";
+            // 
+            // queryinfoLabel
+            // 
+            queryinfoLabel.BackColor = Color.Transparent;
+            queryinfoLabel.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            queryinfoLabel.ForeColor = Color.CornflowerBlue;
+            queryinfoLabel.Location = new Point(799, 238);
+            queryinfoLabel.Name = "queryinfoLabel";
+            queryinfoLabel.Size = new Size(82, 116);
+            queryinfoLabel.TabIndex = 27;
+            queryinfoLabel.TextAlign = ContentAlignment.TopCenter;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-<<<<<<< Updated upstream:MainForm.Designer.cs
-            ClientSize = new Size(799, 596);
+            ClientSize = new Size(897, 744);
+            Controls.Add(queryinfoLabel);
+            Controls.Add(label6);
+            Controls.Add(panel1);
+            Controls.Add(datasourceComboBox);
+            Controls.Add(quickMenuPopoutbutton);
             Controls.Add(errorLabelnew);
-=======
-            ClientSize = new Size(911, 906);
-            Controls.Add(settingsPopoutmenuButton);
-            Controls.Add(infoLabelnew);
->>>>>>> Stashed changes:Forms/MainForm.Designer.cs
             Controls.Add(exportToCsvButton);
             Controls.Add(libsTextbox);
             Controls.Add(disconnectButton);
@@ -261,15 +284,9 @@ namespace JmcAs400Query
             Controls.Add(label2);
             Controls.Add(userTextBox);
             Controls.Add(label1);
-            Controls.Add(dbsourceTextBox);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
-<<<<<<< Updated upstream:MainForm.Designer.cs
-            MaximumSize = new Size(815, 635);
             MinimumSize = new Size(815, 635);
-=======
-            MinimumSize = new Size(929, 831);
->>>>>>> Stashed changes:Forms/MainForm.Designer.cs
             Name = "MainForm";
             Text = "jmQuery";
             Load += MainForm_Load;
@@ -279,8 +296,6 @@ namespace JmcAs400Query
         }
 
         #endregion
-
-        private TextBox dbsourceTextBox;
         private Label label1;
         private Label label2;
         private TextBox userTextBox;
@@ -297,5 +312,10 @@ namespace JmcAs400Query
         private TextBox libsTextbox;
         private Button exportToCsvButton;
         public Label errorLabelnew;
+        private PopoutMenuButton quickMenuPopoutbutton;
+        private ComboBox datasourceComboBox;
+        private Panel panel1;
+        private Label label6;
+        public Label queryinfoLabel;
     }
 }

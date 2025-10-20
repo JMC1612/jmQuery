@@ -20,25 +20,41 @@ namespace JmcAs400Query
             InitializeComponent();
 
             passwordTextBox.PasswordChar = '*';
-<<<<<<< Updated upstream:MainForm.cs
-=======
 
+            DSN_Helper.UserDsnToCombobox(datasourceComboBox);
+
+            SetupQuickMenu();
+        }
+
+        private void SetupQuickMenu()
+        {
             var panel = new Panel
             {
                 Size = new Size(220, 140),
                 BackColor = SystemColors.ControlLight
             };
-            panel.Controls.Add(new Button { Text = "Manage Aliases", AutoSize = true, Location = new Point(10, 10) });
-            panel.Controls.Add(new CheckBox { Text = "Enable feature X", AutoSize = true, Location = new Point(10, 70) });
-            panel.Controls.Add(new TrackBar { Minimum = 0, Maximum = 10, TickStyle = TickStyle.None, Width = 200, Location = new Point(10, 100) });
 
-            settingsPopoutmenuButton.DropDownContent = panel;
->>>>>>> Stashed changes:Forms/MainForm.cs
+            Button loadcsvButton = new Button { Text = "Load CSV", AutoSize = true, Location = new Point(10, 10) };
+            loadcsvButton.Click += (s, e) =>
+            {
+                using OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*" };
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    DataTable csvData = CsvManager.LoadDataTableFromCsv(openFileDialog.FileName);
+                    LoadTableIntoDataDisplay(csvData);
+                }
+            };
+
+            panel.Controls.Add(loadcsvButton);
+            panel.Controls.Add(new Button { Text = "Manage Aliases", AutoSize = true, Location = new Point(10, 40) });
+            panel.Controls.Add(new CheckBox { Text = "Query only mode", AutoSize = true, Location = new Point(10, 70) });
+
+            quickMenuPopoutbutton.DropDownContent = panel;
         }
 
         private void connectButton_Click(object sender, EventArgs e)
         {
-            QueryManager.Connect(dbsourceTextBox.Text, userTextBox.Text, passwordTextBox.Text, libsTextbox.Text);
+            QueryManager.Connect(datasourceComboBox.Text, userTextBox.Text, passwordTextBox.Text, libsTextbox.Text);
             UpdateStatus();
         }
 
@@ -66,11 +82,32 @@ namespace JmcAs400Query
             Task<DataTable> queryTask = Task.Run(() => QueryManager.ExecuteQuery(queryTextBox.Text));
             DataTable queryData = await queryTask;
 
-            dataDisplay.DataSource = queryData;
-            dataDisplay.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            LoadTableIntoDataDisplay(queryData);
 
             UpdateStatus();
 
+        }
+
+        private void LoadTableIntoDataDisplay(DataTable tableData)
+        {
+            if (tableData != null)
+            {
+                queryinfoLabel.Text = string.Empty;
+
+                dataDisplay.DataSource = tableData;
+                dataDisplay.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+                int rowCount = tableData.Rows.Count;
+                int colCount = tableData.Columns.Count;
+
+                queryinfoLabel.Text += $"Name: {tableData.TableName}";
+                queryinfoLabel.Text += $"\nColumns: {colCount}";
+                queryinfoLabel.Text += $"\nRows: {rowCount}";
+            }
+            else
+            {
+                queryinfoLabel.Text += $"\nQuery failed.";
+            }
         }
 
         private void disconnectButton_Click(object sender, EventArgs e)
@@ -90,7 +127,7 @@ namespace JmcAs400Query
 
         private void executeQryButton_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawImage(Properties.Resources.jmQuery, new Rectangle(8, 11, 80, 80));
+            e.Graphics.DrawImage(Properties.Resources.jmQuery, new Rectangle(8, 13, 80, 80));
         }
     }
 }
