@@ -110,11 +110,23 @@ namespace JmcAs400Query
             // 
             // queryTextBox
             // 
+            queryTextBox.BackColor = Color.White;
             queryTextBox.BorderStyle = BorderStyle.FixedSingle;
+<<<<<<< Updated upstream:MainForm.Designer.cs
             queryTextBox.Location = new Point(12, 115);
             queryTextBox.Multiline = true;
             queryTextBox.Name = "queryTextBox";
             queryTextBox.Size = new Size(675, 90);
+=======
+            queryTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            queryTextBox.ForeColor = Color.Black;
+            queryTextBox.Location = new Point(14, 153);
+            queryTextBox.Margin = new Padding(3, 4, 3, 4);
+            queryTextBox.Multiline = true;
+            queryTextBox.Name = "queryTextBox";
+            queryTextBox.ScrollBars = ScrollBars.Vertical;
+            queryTextBox.Size = new Size(771, 239);
+>>>>>>> Stashed changes:Forms/MainForm.Designer.cs
             queryTextBox.TabIndex = 9;
             // 
             // label5
@@ -148,7 +160,12 @@ namespace JmcAs400Query
             // dataDisplay
             // 
             dataDisplay.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+<<<<<<< Updated upstream:MainForm.Designer.cs
             dataDisplay.Location = new Point(12, 210);
+=======
+            dataDisplay.Location = new Point(14, 400);
+            dataDisplay.Margin = new Padding(3, 4, 3, 4);
+>>>>>>> Stashed changes:Forms/MainForm.Designer.cs
             dataDisplay.Name = "dataDisplay";
             dataDisplay.RowHeadersWidth = 51;
             dataDisplay.Size = new Size(776, 343);
@@ -157,7 +174,12 @@ namespace JmcAs400Query
             // executeQryButton
             // 
             executeQryButton.ImageAlign = ContentAlignment.BottomCenter;
+<<<<<<< Updated upstream:MainForm.Designer.cs
             executeQryButton.Location = new Point(692, 115);
+=======
+            executeQryButton.Location = new Point(789, 153);
+            executeQryButton.Margin = new Padding(3, 4, 3, 4);
+>>>>>>> Stashed changes:Forms/MainForm.Designer.cs
             executeQryButton.Name = "executeQryButton";
             executeQryButton.RightToLeft = RightToLeft.No;
             executeQryButton.Size = new Size(96, 89);
@@ -188,8 +210,12 @@ namespace JmcAs400Query
             // 
             // exportToCsvButton
             // 
+<<<<<<< Updated upstream:MainForm.Designer.cs
             exportToCsvButton.Location = new Point(12, 559);
             exportToCsvButton.Margin = new Padding(3, 2, 3, 2);
+=======
+            exportToCsvButton.Location = new Point(14, 865);
+>>>>>>> Stashed changes:Forms/MainForm.Designer.cs
             exportToCsvButton.Name = "exportToCsvButton";
             exportToCsvButton.Size = new Size(112, 22);
             exportToCsvButton.TabIndex = 21;
@@ -212,8 +238,14 @@ namespace JmcAs400Query
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+<<<<<<< Updated upstream:MainForm.Designer.cs
             ClientSize = new Size(799, 596);
             Controls.Add(errorLabelnew);
+=======
+            ClientSize = new Size(911, 906);
+            Controls.Add(settingsPopoutmenuButton);
+            Controls.Add(infoLabelnew);
+>>>>>>> Stashed changes:Forms/MainForm.Designer.cs
             Controls.Add(exportToCsvButton);
             Controls.Add(libsTextbox);
             Controls.Add(disconnectButton);
@@ -232,8 +264,12 @@ namespace JmcAs400Query
             Controls.Add(dbsourceTextBox);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
+<<<<<<< Updated upstream:MainForm.Designer.cs
             MaximumSize = new Size(815, 635);
             MinimumSize = new Size(815, 635);
+=======
+            MinimumSize = new Size(929, 831);
+>>>>>>> Stashed changes:Forms/MainForm.Designer.cs
             Name = "MainForm";
             Text = "jmQuery";
             Load += MainForm_Load;

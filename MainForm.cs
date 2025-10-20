@@ -20,6 +20,20 @@ namespace JmcAs400Query
             InitializeComponent();
 
             passwordTextBox.PasswordChar = '*';
+<<<<<<< Updated upstream:MainForm.cs
+=======
+
+            var panel = new Panel
+            {
+                Size = new Size(220, 140),
+                BackColor = SystemColors.ControlLight
+            };
+            panel.Controls.Add(new Button { Text = "Manage Aliases", AutoSize = true, Location = new Point(10, 10) });
+            panel.Controls.Add(new CheckBox { Text = "Enable feature X", AutoSize = true, Location = new Point(10, 70) });
+            panel.Controls.Add(new TrackBar { Minimum = 0, Maximum = 10, TickStyle = TickStyle.None, Width = 200, Location = new Point(10, 100) });
+
+            settingsPopoutmenuButton.DropDownContent = panel;
+>>>>>>> Stashed changes:Forms/MainForm.cs
         }
 
         private void connectButton_Click(object sender, EventArgs e)

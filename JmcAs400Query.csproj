@@ -7,6 +7,13 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>Resources/jmQuery_icon.ico</ApplicationIcon>
+<<<<<<< Updated upstream
+=======
+	  <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+	  <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
+	  <Title>jmQuery</Title>
+	  <Authors>JMC1612</Authors>
+>>>>>>> Stashed changes
   </PropertyGroup>
 
   <ItemGroup>
