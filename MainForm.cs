@@ -45,9 +45,14 @@ namespace JmcAs400Query
                 }
             };
 
+            TextBox delimiterTextBox = new TextBox { Text = ";", Size = new Size(13, 10), Location = new Point(140, 68) };
+            delimiterTextBox.TextChanged += (s, e) => { char[] delimiterCharArray = delimiterTextBox.Text.ToCharArray(); if (delimiterCharArray.Length > 0) { CsvManager.userDefindedDilimiter = delimiterCharArray[0]; } };
+
             panel.Controls.Add(loadcsvButton);
             panel.Controls.Add(new Button { Text = "Manage Aliases", AutoSize = true, Location = new Point(10, 40) });
-            panel.Controls.Add(new CheckBox { Text = "Query only mode", AutoSize = true, Location = new Point(10, 70) });
+
+            panel.Controls.Add(new Label { Text = "Custom delimiter:", AutoSize = true, Location = new Point(10, 70) });
+            panel.Controls.Add(delimiterTextBox);
 
             quickMenuPopoutbutton.DropDownContent = panel;
         }
@@ -106,7 +111,7 @@ namespace JmcAs400Query
             }
             else
             {
-                queryinfoLabel.Text += $"\nQuery failed.";
+                queryinfoLabel.Text = $"\nQuery failed.";
             }
         }
 

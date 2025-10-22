@@ -11,7 +11,7 @@
 	  <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
 	  <Title>jmQuery</Title>
 	  <Authors>JMC1612</Authors>
-	  <PlatformTarget>AnyCPU</PlatformTarget>
+<PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
