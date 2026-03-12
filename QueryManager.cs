@@ -1,11 +1,15 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Odbc;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace JmcAs400Query
 {
@@ -13,6 +17,8 @@ namespace JmcAs400Query
     {
         public static OdbcConnection connection;
         private static string connectionString;
+        
+        public static string selectedDsn = string.Empty;
 
         public static DataTable lastQueryResult;
 
@@ -30,6 +36,7 @@ namespace JmcAs400Query
             try
             {
                 connectionString = $"DSN={dbsource};UID={user};PWD={password};DefaultLibraries={defaultLibs};"; //braucht den namen des ODBC Driver bei dem die IP und alles hinterlegt ist
+                selectedDsn = dbsource;
 
                 if (connection != null && connection.State == ConnectionState.Open)
                 {
@@ -67,7 +74,8 @@ namespace JmcAs400Query
             }
             catch (Exception ex)
             {
-                MainForm.Instance.Invoke((MethodInvoker)(() => {
+                MainForm.Instance.Invoke((MethodInvoker)(() =>
+                {
                     MainForm.Instance.errorLabelnew.Text = ex.Message;
                 }));
 

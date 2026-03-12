@@ -12,7 +12,7 @@ namespace JmcAs400Query
     {
         public static char userDefindedDilimiter = '|';
 
-        public static string CreateCsvContent(DataTable data, char seperator = ';')
+        public static string CreateCsvContent(DataTable data, char seperator = ',')
         {
             var csvContent = new StringBuilder();
 
@@ -68,7 +68,8 @@ namespace JmcAs400Query
         public static DataTable LoadDataTableFromCsv(string filePath)
         {
             DataTable dt = new DataTable();
-            using (var reader = new StreamReader(filePath))
+            string tempCopy = EnsureUtf8TempCopy(filePath);
+            using (var reader = new StreamReader(tempCopy))
             {
                 bool isHeader = true;
                 char delimiter = ',';
@@ -91,7 +92,7 @@ namespace JmcAs400Query
                         {
                             delimiter = ';';
                         }
-                        Debug.WriteLine("Load CSV with dilimiter: " + userDefindedDilimiter);
+                        Debug.WriteLine("Load CSV with dilimiter: " + delimiter);
                     }
 
                     string[] values = line.Split(delimiter);
@@ -112,6 +113,15 @@ namespace JmcAs400Query
             }
             dt.TableName = Path.GetFileNameWithoutExtension(filePath);
             return dt;
+        }
+
+        public static string EnsureUtf8TempCopy(string csvPath)
+        {
+            string content = File.ReadAllText(csvPath, Encoding.Unicode);
+            string tempPath = Path.Combine(Path.GetTempPath(), Path.GetFileName(csvPath));
+            File.WriteAllText(tempPath, content, new UTF8Encoding(false));
+
+            return tempPath;
         }
     }
 }

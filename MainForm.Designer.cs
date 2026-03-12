@@ -53,7 +53,12 @@ namespace JmcAs400Query
             panel1 = new Panel();
             label6 = new Label();
             queryinfoLabel = new Label();
+            CommandTab = new TabControl();
+            QueryTab = new TabPage();
+            tabPage2 = new TabPage();
             ((System.ComponentModel.ISupportInitialize)dataDisplay).BeginInit();
+            CommandTab.SuspendLayout();
+            QueryTab.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -110,7 +115,7 @@ namespace JmcAs400Query
             // 
             queryTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             queryTextBox.ForeColor = Color.Black;
-            queryTextBox.Location = new Point(15, 116);
+            queryTextBox.Location = new Point(15, 31);
             queryTextBox.Margin = new Padding(3, 4, 3, 4);
             queryTextBox.Multiline = true;
             queryTextBox.Name = "queryTextBox";
@@ -121,11 +126,11 @@ namespace JmcAs400Query
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 97);
+            label5.Location = new Point(15, 12);
             label5.Name = "label5";
-            label5.Size = new Size(42, 15);
+            label5.Size = new Size(86, 15);
             label5.TabIndex = 10;
-            label5.Text = "Query:";
+            label5.Text = "SELECT-Query:";
             // 
             // connectButton
             // 
@@ -149,7 +154,7 @@ namespace JmcAs400Query
             // dataDisplay
             // 
             dataDisplay.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataDisplay.Location = new Point(15, 362);
+            dataDisplay.Location = new Point(15, 278);
             dataDisplay.Name = "dataDisplay";
             dataDisplay.RowHeadersWidth = 51;
             dataDisplay.Size = new Size(878, 343);
@@ -158,7 +163,7 @@ namespace JmcAs400Query
             // executeQryButton
             // 
             executeQryButton.ImageAlign = ContentAlignment.BottomCenter;
-            executeQryButton.Location = new Point(794, 116);
+            executeQryButton.Location = new Point(794, 31);
             executeQryButton.Name = "executeQryButton";
             executeQryButton.RightToLeft = RightToLeft.No;
             executeQryButton.Size = new Size(96, 96);
@@ -189,7 +194,7 @@ namespace JmcAs400Query
             // 
             // exportToCsvButton
             // 
-            exportToCsvButton.Location = new Point(15, 710);
+            exportToCsvButton.Location = new Point(15, 630);
             exportToCsvButton.Margin = new Padding(3, 2, 3, 2);
             exportToCsvButton.Name = "exportToCsvButton";
             exportToCsvButton.Size = new Size(112, 22);
@@ -219,6 +224,7 @@ namespace JmcAs400Query
             quickMenuPopoutbutton.TabIndex = 23;
             quickMenuPopoutbutton.Text = "Quick menu";
             quickMenuPopoutbutton.UseVisualStyleBackColor = true;
+            quickMenuPopoutbutton.Click += quickMenuPopoutbutton_Click;
             // 
             // datasourceComboBox
             // 
@@ -232,7 +238,7 @@ namespace JmcAs400Query
             // 
             panel1.BackColor = SystemColors.Control;
             panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Location = new Point(795, 218);
+            panel1.Location = new Point(795, 133);
             panel1.Name = "panel1";
             panel1.Size = new Size(90, 137);
             panel1.TabIndex = 25;
@@ -241,7 +247,7 @@ namespace JmcAs400Query
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Underline, GraphicsUnit.Point, 0);
-            label6.Location = new Point(808, 223);
+            label6.Location = new Point(808, 138);
             label6.Name = "label6";
             label6.Size = new Size(66, 15);
             label6.TabIndex = 26;
@@ -252,32 +258,63 @@ namespace JmcAs400Query
             queryinfoLabel.BackColor = Color.Transparent;
             queryinfoLabel.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             queryinfoLabel.ForeColor = Color.CornflowerBlue;
-            queryinfoLabel.Location = new Point(799, 238);
+            queryinfoLabel.Location = new Point(799, 153);
             queryinfoLabel.Name = "queryinfoLabel";
             queryinfoLabel.Size = new Size(82, 116);
             queryinfoLabel.TabIndex = 27;
             queryinfoLabel.TextAlign = ContentAlignment.TopCenter;
             // 
+            // CommandTab
+            // 
+            CommandTab.Controls.Add(QueryTab);
+            CommandTab.Controls.Add(tabPage2);
+            CommandTab.Location = new Point(12, 107);
+            CommandTab.Name = "CommandTab";
+            CommandTab.SelectedIndex = 0;
+            CommandTab.Size = new Size(909, 694);
+            CommandTab.TabIndex = 28;
+            // 
+            // QueryTab
+            // 
+            QueryTab.Controls.Add(queryinfoLabel);
+            QueryTab.Controls.Add(dataDisplay);
+            QueryTab.Controls.Add(label6);
+            QueryTab.Controls.Add(panel1);
+            QueryTab.Controls.Add(exportToCsvButton);
+            QueryTab.Controls.Add(executeQryButton);
+            QueryTab.Controls.Add(label5);
+            QueryTab.Controls.Add(queryTextBox);
+            QueryTab.Location = new Point(4, 24);
+            QueryTab.Name = "QueryTab";
+            QueryTab.Padding = new Padding(3);
+            QueryTab.Size = new Size(901, 666);
+            QueryTab.TabIndex = 0;
+            QueryTab.Text = "Query";
+            QueryTab.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(901, 666);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Command";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(897, 744);
-            Controls.Add(queryinfoLabel);
-            Controls.Add(label6);
-            Controls.Add(panel1);
+            ClientSize = new Size(921, 788);
+            Controls.Add(CommandTab);
             Controls.Add(datasourceComboBox);
             Controls.Add(quickMenuPopoutbutton);
             Controls.Add(errorLabelnew);
-            Controls.Add(exportToCsvButton);
             Controls.Add(libsTextbox);
             Controls.Add(disconnectButton);
-            Controls.Add(executeQryButton);
-            Controls.Add(dataDisplay);
             Controls.Add(statusLabel);
             Controls.Add(connectButton);
-            Controls.Add(label5);
-            Controls.Add(queryTextBox);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(passwordTextBox);
@@ -291,6 +328,9 @@ namespace JmcAs400Query
             Text = "jmQuery";
             Load += MainForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataDisplay).EndInit();
+            CommandTab.ResumeLayout(false);
+            QueryTab.ResumeLayout(false);
+            QueryTab.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -317,5 +357,8 @@ namespace JmcAs400Query
         private Panel panel1;
         private Label label6;
         public Label queryinfoLabel;
+        private TabControl CommandTab;
+        private TabPage QueryTab;
+        private TabPage tabPage2;
     }
 }

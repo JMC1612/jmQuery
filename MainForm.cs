@@ -134,5 +134,10 @@ namespace JmcAs400Query
         {
             e.Graphics.DrawImage(Properties.Resources.jmQuery, new Rectangle(8, 13, 80, 80));
         }
+
+        private void quickMenuPopoutbutton_Click(object sender, EventArgs e)
+        {
+            Debug.WriteLine("");
+        }
     }
 }

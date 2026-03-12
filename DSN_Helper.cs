@@ -23,6 +23,7 @@ namespace JmcAs400Query
             {
                 dsnCombobox.Text = "No DSN found.";
             }
+            QueryManager.selectedDsn = dsnCombobox.Text;
         }
 
         private static IEnumerable<string> GetDsns(RegistryHive hive, RegistryView view)
