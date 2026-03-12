@@ -56,9 +56,13 @@ namespace JmcAs400Query
             CommandTab = new TabControl();
             QueryTab = new TabPage();
             tabPage2 = new TabPage();
+            executeCommandButton = new Button();
+            label7 = new Label();
+            commandTextbox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataDisplay).BeginInit();
             CommandTab.SuspendLayout();
             QueryTab.SuspendLayout();
+            tabPage2.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -268,10 +272,10 @@ namespace JmcAs400Query
             // 
             CommandTab.Controls.Add(QueryTab);
             CommandTab.Controls.Add(tabPage2);
-            CommandTab.Location = new Point(12, 107);
+            CommandTab.Location = new Point(12, 115);
             CommandTab.Name = "CommandTab";
             CommandTab.SelectedIndex = 0;
-            CommandTab.Size = new Size(909, 694);
+            CommandTab.Size = new Size(909, 686);
             CommandTab.TabIndex = 28;
             // 
             // QueryTab
@@ -294,13 +298,53 @@ namespace JmcAs400Query
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(executeCommandButton);
+            tabPage2.Controls.Add(label7);
+            tabPage2.Controls.Add(commandTextbox);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(901, 666);
+            tabPage2.Size = new Size(901, 658);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Command";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // executeCommandButton
+            // 
+            executeCommandButton.Font = new Font("Segoe UI", 7.5F);
+            executeCommandButton.ImageAlign = ContentAlignment.BottomCenter;
+            executeCommandButton.Location = new Point(794, 31);
+            executeCommandButton.Name = "executeCommandButton";
+            executeCommandButton.RightToLeft = RightToLeft.No;
+            executeCommandButton.Size = new Size(96, 96);
+            executeCommandButton.TabIndex = 19;
+            executeCommandButton.Text = "Execute command";
+            executeCommandButton.TextAlign = ContentAlignment.TopCenter;
+            executeCommandButton.TextImageRelation = TextImageRelation.TextAboveImage;
+            executeCommandButton.UseVisualStyleBackColor = true;
+            executeCommandButton.Click += executeCommandButton_Click;
+            executeCommandButton.Paint += executeQryButton_Paint;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(15, 12);
+            label7.Name = "label7";
+            label7.Size = new Size(148, 15);
+            label7.TabIndex = 12;
+            label7.Text = "Non-Query DB Command:";
+            // 
+            // commandTextbox
+            // 
+            commandTextbox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            commandTextbox.ForeColor = Color.Black;
+            commandTextbox.Location = new Point(15, 31);
+            commandTextbox.Margin = new Padding(3, 4, 3, 4);
+            commandTextbox.Multiline = true;
+            commandTextbox.Name = "commandTextbox";
+            commandTextbox.ScrollBars = ScrollBars.Vertical;
+            commandTextbox.Size = new Size(774, 239);
+            commandTextbox.TabIndex = 11;
             // 
             // MainForm
             // 
@@ -331,6 +375,8 @@ namespace JmcAs400Query
             CommandTab.ResumeLayout(false);
             QueryTab.ResumeLayout(false);
             QueryTab.PerformLayout();
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -360,5 +406,8 @@ namespace JmcAs400Query
         private TabControl CommandTab;
         private TabPage QueryTab;
         private TabPage tabPage2;
+        private Label label7;
+        private TextBox commandTextbox;
+        private Button executeCommandButton;
     }
 }

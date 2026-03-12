@@ -137,7 +137,13 @@ namespace JmcAs400Query
 
         private void quickMenuPopoutbutton_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("");
+        }
+
+        private void executeCommandButton_Click(object sender, EventArgs e)
+        {
+            errorLabelnew.Text = string.Empty;
+
+            QueryManager.ExecuteCommand(commandTextbox.Text);
         }
     }
 }

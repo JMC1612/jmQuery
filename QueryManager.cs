@@ -35,7 +35,7 @@ namespace JmcAs400Query
         {
             try
             {
-                connectionString = $"DSN={dbsource};UID={user};PWD={password};DefaultLibraries={defaultLibs};"; //braucht den namen des ODBC Driver bei dem die IP und alles hinterlegt ist
+                connectionString = $"DSN={dbsource};UID={user};PWD={password};DefaultLibraries={defaultLibs};CONNTYPE=1;ALLOWPROCCALLS=1;"; //braucht den namen des ODBC Driver bei dem die IP und alles hinterlegt ist
                 selectedDsn = dbsource;
 
                 if (connection != null && connection.State == ConnectionState.Open)
@@ -80,6 +80,25 @@ namespace JmcAs400Query
                 }));
 
                 return null;
+            }
+        }
+
+        public static void ExecuteCommand(string command)
+        {
+            Debug.WriteLine("1");
+            try
+            {
+                using var cmd = connection.CreateCommand();
+                Debug.WriteLine("2");
+                cmd.CommandText = command;
+                Debug.WriteLine("3");
+                cmd.ExecuteNonQuery();
+                Debug.WriteLine("4");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                MainForm.Instance.errorLabelnew.Text = ex.Message;
             }
         }
 
