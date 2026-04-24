@@ -55,6 +55,7 @@ namespace JmcAs400Query
         public static DataTable ExecuteQuery(string query)
         {
             Debug.WriteLine(connectionString);
+            //MainForm.Instance.StartProgressbar();
             try
             {
                 if (connection != null && connection.State == ConnectionState.Open)
@@ -70,6 +71,7 @@ namespace JmcAs400Query
 
                 dataAdapt.Fill(dataTable);
                 lastQueryResult = dataTable;
+                //MainForm.Instance.EndProgressbar();
                 return dataTable;
             }
             catch (Exception ex)
@@ -78,22 +80,19 @@ namespace JmcAs400Query
                 {
                     MainForm.Instance.errorLabelnew.Text = ex.Message;
                 }));
-
+                //MainForm.Instance.EndProgressbar();
                 return null;
             }
         }
 
         public static void ExecuteCommand(string command)
         {
-            Debug.WriteLine("1");
             try
             {
                 using var cmd = connection.CreateCommand();
-                Debug.WriteLine("2");
                 cmd.CommandText = command;
-                Debug.WriteLine("3");
                 cmd.ExecuteNonQuery();
-                Debug.WriteLine("4");
+                Debug.WriteLine("Command Successful");
             }
             catch (Exception ex)
             {

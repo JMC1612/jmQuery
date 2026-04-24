@@ -19,6 +19,8 @@ namespace JmcAs400Query
 
             InitializeComponent();
 
+            //queryTextBox.SchemaObjects.AddRange(new[] { });
+
             passwordTextBox.PasswordChar = '*';
 
             DSN_Helper.UserDsnToCombobox(datasourceComboBox);
@@ -34,27 +36,16 @@ namespace JmcAs400Query
                 BackColor = SystemColors.ControlLight
             };
 
-            Button loadcsvButton = new Button { Text = "Load CSV", AutoSize = true, Location = new Point(10, 10) };
-            loadcsvButton.Click += (s, e) =>
-            {
-                using OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*" };
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    DataTable csvData = CsvManager.LoadDataTableFromCsv(openFileDialog.FileName);
-                    LoadTableIntoDataDisplay(csvData);
-                }
-            };
-
-            TextBox delimiterTextBox = new TextBox { Text = ";", Size = new Size(13, 10), Location = new Point(140, 68) };
-            delimiterTextBox.TextChanged += (s, e) => { char[] delimiterCharArray = delimiterTextBox.Text.ToCharArray(); if (delimiterCharArray.Length > 0) { CsvManager.userDefindedDilimiter = delimiterCharArray[0]; } };
-
-            panel.Controls.Add(loadcsvButton);
-            panel.Controls.Add(new Button { Text = "Manage Aliases", AutoSize = true, Location = new Point(10, 40) });
-
-            panel.Controls.Add(new Label { Text = "Custom delimiter:", AutoSize = true, Location = new Point(10, 70) });
-            panel.Controls.Add(delimiterTextBox);
+            var as400joblogButton = new Button { BackColor = Color.White, Text = "View JOBLOG", AutoSize = true, Location = new Point(10, 10) };
+            as400joblogButton.Click += (s, e) => { ShowAs400Joblog(); };
+            panel.Controls.Add(as400joblogButton);
 
             quickMenuPopoutbutton.DropDownContent = panel;
+        }
+
+        private void ShowAs400Joblog()
+        {
+            queryTextBox.Text = "SELECT ORDINAL_POSITION, MESSAGE_ID, MESSAGE_TYPE, MESSAGE_TEXT\r\nFROM TABLE(QSYS2.JOBLOG_INFO('*'))\r\nORDER BY ORDINAL_POSITION DESC\r\nFETCH FIRST 20 ROWS ONLY";
         }
 
         private void connectButton_Click(object sender, EventArgs e)
@@ -84,7 +75,8 @@ namespace JmcAs400Query
             UpdateStatus();
             errorLabelnew.Text = string.Empty;
 
-            Task<DataTable> queryTask = Task.Run(() => QueryManager.ExecuteQuery(queryTextBox.Text));
+            string query = queryTextBox.Text;
+            Task<DataTable> queryTask = Task.Run(() => QueryManager.ExecuteQuery(query));
             DataTable queryData = await queryTask;
 
             LoadTableIntoDataDisplay(queryData);
@@ -105,9 +97,13 @@ namespace JmcAs400Query
                 int rowCount = tableData.Rows.Count;
                 int colCount = tableData.Columns.Count;
 
-                queryinfoLabel.Text += $"Name: {tableData.TableName}";
+                string tableVisualName = tableData.TableName;
+                if (string.IsNullOrEmpty(tableVisualName)) { tableVisualName = "???"; }
+
+                queryinfoLabel.Text += $"Name: {tableVisualName}";
                 queryinfoLabel.Text += $"\nColumns: {colCount}";
                 queryinfoLabel.Text += $"\nRows: {rowCount}";
+                queryinfoLabel.Text += $"\n\nTimestamp: {DateTime.Now}";
             }
             else
             {
@@ -123,11 +119,7 @@ namespace JmcAs400Query
 
         private void exportToCsvButton_Click(object sender, EventArgs e)
         {
-            using SaveFileDialog saveDialog = new SaveFileDialog { Filter = "CSV (*.csv)|*csv", FileName = "jmcquery.csv" };
-            if (saveDialog.ShowDialog() == DialogResult.OK)
-            {
-                File.WriteAllText(saveDialog.FileName, CsvManager.CreateCsvContent(QueryManager.lastQueryResult), Encoding.UTF8);
-            }
+            CsvManager.ExportToCsvButtonClick();
         }
 
         private void executeQryButton_Paint(object sender, PaintEventArgs e)
@@ -144,6 +136,16 @@ namespace JmcAs400Query
             errorLabelnew.Text = string.Empty;
 
             QueryManager.ExecuteCommand(commandTextbox.Text);
+        }
+
+        public void StartProgressbar()
+        {
+            progressBar1.Value = 10;
+        }
+
+        public void EndProgressbar()
+        {
+            progressBar1.Value = 100;
         }
     }
 }

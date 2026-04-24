@@ -4,7 +4,13 @@
     <_LastSelectedProfileId>C:\Users\de64609\source\repos\JmcAs400Query\JmcAs400Query\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="MainForm.cs">
+    <Compile Update="Forms\SuggestionPopupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Infrastructure\SqlTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI_Controls\PopoutMenuButton.cs">

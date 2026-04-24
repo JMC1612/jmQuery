@@ -38,7 +38,7 @@ namespace JmcAs400Query
             label3 = new Label();
             passwordTextBox = new TextBox();
             label4 = new Label();
-            queryTextBox = new TextBox();
+            queryTextBox = new SqlTextBox();
             label5 = new Label();
             connectButton = new Button();
             statusLabel = new Label();
@@ -55,6 +55,7 @@ namespace JmcAs400Query
             queryinfoLabel = new Label();
             CommandTab = new TabControl();
             QueryTab = new TabPage();
+            progressBar1 = new ProgressBar();
             tabPage2 = new TabPage();
             executeCommandButton = new Button();
             label7 = new Label();
@@ -117,15 +118,17 @@ namespace JmcAs400Query
             // 
             // queryTextBox
             // 
+            queryTextBox.AcceptsTab = true;
             queryTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             queryTextBox.ForeColor = Color.Black;
             queryTextBox.Location = new Point(15, 31);
             queryTextBox.Margin = new Padding(3, 4, 3, 4);
-            queryTextBox.Multiline = true;
             queryTextBox.Name = "queryTextBox";
-            queryTextBox.ScrollBars = ScrollBars.Vertical;
+            queryTextBox.ScrollBars = RichTextBoxScrollBars.Vertical;
             queryTextBox.Size = new Size(774, 239);
             queryTextBox.TabIndex = 9;
+            queryTextBox.Text = "";
+            queryTextBox.WordWrap = false;
             // 
             // label5
             // 
@@ -198,7 +201,7 @@ namespace JmcAs400Query
             // 
             // exportToCsvButton
             // 
-            exportToCsvButton.Location = new Point(15, 630);
+            exportToCsvButton.Location = new Point(15, 654);
             exportToCsvButton.Margin = new Padding(3, 2, 3, 2);
             exportToCsvButton.Name = "exportToCsvButton";
             exportToCsvButton.Size = new Size(112, 22);
@@ -222,7 +225,7 @@ namespace JmcAs400Query
             // 
             quickMenuPopoutbutton.AccessibleRole = AccessibleRole.PushButton;
             quickMenuPopoutbutton.FlatStyle = FlatStyle.System;
-            quickMenuPopoutbutton.Location = new Point(794, 34);
+            quickMenuPopoutbutton.Location = new Point(810, 33);
             quickMenuPopoutbutton.Name = "quickMenuPopoutbutton";
             quickMenuPopoutbutton.Size = new Size(96, 23);
             quickMenuPopoutbutton.TabIndex = 23;
@@ -275,11 +278,12 @@ namespace JmcAs400Query
             CommandTab.Location = new Point(12, 115);
             CommandTab.Name = "CommandTab";
             CommandTab.SelectedIndex = 0;
-            CommandTab.Size = new Size(909, 686);
+            CommandTab.Size = new Size(909, 706);
             CommandTab.TabIndex = 28;
             // 
             // QueryTab
             // 
+            QueryTab.Controls.Add(progressBar1);
             QueryTab.Controls.Add(queryinfoLabel);
             QueryTab.Controls.Add(dataDisplay);
             QueryTab.Controls.Add(label6);
@@ -291,10 +295,17 @@ namespace JmcAs400Query
             QueryTab.Location = new Point(4, 24);
             QueryTab.Name = "QueryTab";
             QueryTab.Padding = new Padding(3);
-            QueryTab.Size = new Size(901, 666);
+            QueryTab.Size = new Size(901, 678);
             QueryTab.TabIndex = 0;
             QueryTab.Text = "Query";
             QueryTab.UseVisualStyleBackColor = true;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Location = new Point(15, 627);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(878, 22);
+            progressBar1.TabIndex = 28;
             // 
             // tabPage2
             // 
@@ -304,7 +315,7 @@ namespace JmcAs400Query
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(901, 658);
+            tabPage2.Size = new Size(901, 678);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Command";
             tabPage2.UseVisualStyleBackColor = true;
@@ -350,7 +361,7 @@ namespace JmcAs400Query
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(921, 788);
+            ClientSize = new Size(921, 825);
             Controls.Add(CommandTab);
             Controls.Add(datasourceComboBox);
             Controls.Add(quickMenuPopoutbutton);
@@ -388,7 +399,7 @@ namespace JmcAs400Query
         private Label label3;
         private TextBox passwordTextBox;
         private Label label4;
-        private TextBox queryTextBox;
+        private SqlTextBox queryTextBox;
         private Label label5;
         private Button connectButton;
         private Label statusLabel;
@@ -409,5 +420,6 @@ namespace JmcAs400Query
         private Label label7;
         private TextBox commandTextbox;
         private Button executeCommandButton;
+        private ProgressBar progressBar1;
     }
 }

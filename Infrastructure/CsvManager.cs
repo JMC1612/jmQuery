@@ -14,6 +14,11 @@ namespace JmcAs400Query
 
         public static string CreateCsvContent(DataTable data, char seperator = ',')
         {
+            if(data == null)
+            {
+                return string.Empty;
+            }
+
             var csvContent = new StringBuilder();
 
             csvContent.AppendLine(string.Join(seperator, data.Columns.Cast<DataColumn>().Select(c => Escape(c.ColumnName, seperator))));
@@ -122,6 +127,15 @@ namespace JmcAs400Query
             File.WriteAllText(tempPath, content, new UTF8Encoding(false));
 
             return tempPath;
+        }
+
+        internal static void ExportToCsvButtonClick()
+        {
+            using SaveFileDialog saveDialog = new SaveFileDialog { Filter = "CSV (*.csv)|*csv", FileName = "jmcquery.csv" };
+            if (saveDialog.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText(saveDialog.FileName, CsvManager.CreateCsvContent(QueryManager.lastQueryResult), Encoding.UTF8);
+            }
         }
     }
 }
