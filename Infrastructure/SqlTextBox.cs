@@ -1,5 +1,4 @@
-﻿using JmcAs400Query.Forms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -10,6 +9,7 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace JmcAs400Query
 {
+
     public class SqlTextBox : RichTextBox
     {
         private readonly Timer _highlightTimer;
@@ -34,11 +34,6 @@ namespace JmcAs400Query
             "CASE", "WHEN", "THEN", "ELSE", "END", "AS", "DISTINCT",
             "UNION", "ALL", "FETCH", "FIRST", "ROWS", "ONLY",
             "WITH", "CURRENT", "DATE", "TIME", "TIMESTAMP"
-        };
-
-        private static readonly string[] Functions =
-        {
-            "MAX", "SUM", "COUNT", "AVG", "MIN", "SUBSTR"
         };
 
         private static readonly Regex StringRegex =
@@ -105,11 +100,6 @@ namespace JmcAs400Query
                 _highlightTimer.Stop();
                 _highlightTimer.Start();
 
-                // BeginInvoke stellt sicher, dass das RichTextBox-Layout
-                // abgeschlossen ist, bevor GetPositionFromCharIndex aufgerufen
-                // wird. Ohne diesen Aufschub liefert die Methode noch die
-                // alte Cursor-Position, was das Popup für wenige Frames an
-                // der falschen Stelle erscheinen lässt.
                 BeginInvoke((Action)(() => ShowSuggestions(false)));
             };
 
@@ -132,11 +122,6 @@ namespace JmcAs400Query
         {
             base.OnSelectionChanged(e);
 
-            // Während HighlightSyntax viele Select()-Aufrufe macht und
-            // gleichzeitig WM_SETREDRAW=0 gesetzt ist, liefert
-            // GetPositionFromCharIndex falsche Koordinaten. Jede
-            // Neupositionierung in diesem Zustand verursacht den
-            // kurzen Teleport-Effekt des Popups.
             if (_isHighlighting)
                 return;
 
@@ -144,9 +129,7 @@ namespace JmcAs400Query
                 RepositionPopup();
         }
 
-        // FIX 1: Mausklick löst kein TextChanged aus.
-        // Nach dem Klick Cursor-Position abwarten (BeginInvoke),
-        // dann Vorschläge für das Wort an der neuen Position berechnen.
+
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
@@ -284,8 +267,6 @@ namespace JmcAs400Query
 
             if (!_popup.Visible)
             {
-                // FIX 2: Popup mit Owner-Form anzeigen, damit Fokus-Verwaltung
-                // korrekt funktioniert und das Popup nicht dauerhaft verschwindet.
                 _popup.Show(_ownerForm ?? FindForm());
             }
         }
@@ -387,6 +368,9 @@ namespace JmcAs400Query
             Color oldColor = SelectionColor;
             Font? oldFont = SelectionFont;
 
+            var scrollPos = new Point();
+            SendMessage(Handle, EM_GETSCROLLPOS, IntPtr.Zero, ref scrollPos);
+
             SuspendPainting();
 
             try
@@ -435,6 +419,8 @@ namespace JmcAs400Query
                 SelectionColor = oldColor;
                 if (oldFont != null)
                     SelectionFont = oldFont;
+
+                SendMessage(Handle, EM_SETSCROLLPOS, IntPtr.Zero, ref scrollPos);
             }
             finally
             {
@@ -464,9 +450,34 @@ namespace JmcAs400Query
         }
 
         private const int WM_SETREDRAW = 0x000B;
+        private const int WM_HSCROLL = 0x0114;
+        private const int WM_VSCROLL = 0x0115;
+        private const int WM_MOUSEWHEEL = 0x020A;
+        private const int EM_GETSCROLLPOS = 0x04DD;
+        private const int EM_SETSCROLLPOS = 0x04DE;
+
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+
+            if (m.Msg == WM_VSCROLL || m.Msg == WM_HSCROLL || m.Msg == WM_MOUSEWHEEL)
+                Invalidate();
+        }
+
+        private const uint RDW_INVALIDATE = 0x0001; 
+        private const uint RDW_ERASE = 0x0004; 
+        private const uint RDW_FRAME = 0x0400;
+        private const uint RDW_ALLCHILDREN = 0x0080; 
+        private const uint RDW_UPDATENOW = 0x0100;
 
         [DllImport("user32.dll")]
         private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, ref Point lParam);
+
+        [DllImport("user32.dll")]
+        private static extern bool RedrawWindow(IntPtr hWnd, IntPtr lprcUpdate, IntPtr hrgnUpdate, uint flags);
 
         private void SuspendPainting()
         {
@@ -476,11 +487,16 @@ namespace JmcAs400Query
 
         private void ResumePainting()
         {
-            if (IsHandleCreated)
-            {
-                SendMessage(Handle, WM_SETREDRAW, new IntPtr(1), IntPtr.Zero);
-                Invalidate();
-            }
+            if (!IsHandleCreated)
+                return;
+
+            SendMessage(Handle, WM_SETREDRAW, new IntPtr(1), IntPtr.Zero);
+
+            RedrawWindow(
+                Handle,
+                IntPtr.Zero,
+                IntPtr.Zero,
+                RDW_INVALIDATE | RDW_ERASE | RDW_FRAME | RDW_ALLCHILDREN | RDW_UPDATENOW);
         }
 
         protected override void Dispose(bool disposing)
@@ -498,4 +514,6 @@ namespace JmcAs400Query
             base.Dispose(disposing);
         }
     }
+
+
 }
